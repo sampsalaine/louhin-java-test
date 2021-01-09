@@ -14,7 +14,5 @@ public class RunTest {
 		Data in = CsvIO.loadCsvData(in1);
 		Data out = in.clone();
 		CsvIO.saveTextData(out, out1);
-		System.out.println("done");
 	}
-
 }
