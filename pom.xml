@@ -1,25 +1,76 @@
-POST
-https://mobile.louhin.com/reports/preprocessing-save?id=1192850&analyzer.analysisParameters%5B1175734%5D.value%5B'email'%5D=juha-pekka.jarva%40bimkemi.com
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.louhin</groupId>
+	<artifactId>service-python</artifactId>
+	<version>0.3-SNAPSHOT</version>
+	<name>Louhin Python template</name>
 
-https://mobile.louhin.com/reports/preprocessing-save?id=1195246&analyzer.analysisParameters%5B1175734%5D.value%5B'email'%5D=juha-pekka.jarva%40bimkemi.com
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Maven Central Repository</name>
+			<url>https://repo1.maven.org/maven2/</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>louhin</id>
+			<name>Louhin repository</name>
+			<url>https://repository.louhin.com/louhin/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
-<button id="bim_update" class="btn btn-primary" onclick="Paivita()">Päivitä</button>
-<script>
-function Paivita() {
-$('#bim_update').prop('disabled',true);
-$.post(
-'https://mobile.louhin.com/reports/preprocessing-save?id=1195246&analyzer.analysisParameters%5B1175734%5D.value%5B'email'%5D=juha-pekka.jarva%40bimkemi.com', function( data ) {
-$.bootstrapGrowl('Päivitetty'); $('#bim_update').prop('disabled',false);
-});
-}</script>
+	<packaging>jar</packaging>
 
-<button id="bim_update" class="btn btn-primary"  onclick="Paivita()">Päivitä Netbiter (viimeisin arvo)</button>
-<script>
-function Paivita() {
-$('#bim_update').prop('disabled',true);
-$.post(
-'https://mobile.louhin.com/reports/preprocessing-save?id=1192850&analyzer.analysisParameters%5B1175734%5D.value%5B%27email%27%5D=juha-pekka.jarva%40bimkemi.com', function( data ) {
-$.bootstrapGrowl('Päivitetty'); $('#bim_update').prop('disabled',false);
- //alert('Päivitetty');
-});
-}</script>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>fi.datarangers</groupId>
+			<artifactId>dmtools</artifactId>
+			<version>3.8.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.louhin.test.RunTest</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assemble-all</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
